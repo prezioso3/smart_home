@@ -84,3 +84,7 @@ class SmartHomeTest(unittest.TestCase):
         mock_gas_level.return_value = 450
         self.sh.monitor_air_quality()
         self.assertFalse(self.sh.buzzer_on)
+
+    def test_air_quality_above_threshold(self):
+        self.sh.monitor_air_quality()
+        self.assertTrue(self.sh.buzzer_on)
