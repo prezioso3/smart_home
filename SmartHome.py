@@ -127,7 +127,16 @@ class SmartHome:
                     self.servo.ChangeDutyCycle(12)
                     self.window_open = True
                     self.servo.ChangeFrequency(0.0)
-
+                else:
+                    self.servo.ChangeFrequency(50.0)
+                    self.servo.ChangeDutyCycle(2)
+                    self.window_open = False
+                    self.servo.ChangeFrequency(0.0)
+            else:
+                self.servo.ChangeFrequency(50.0)
+                self.servo.ChangeDutyCycle(2)
+                self.window_open = False
+                self.servo.ChangeFrequency(0.0)
         except RuntimeError as error:
             print(error.args[0])
             time.sleep(2)
