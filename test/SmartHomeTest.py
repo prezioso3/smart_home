@@ -54,3 +54,7 @@ class SmartHomeTest(unittest.TestCase):
         mock_light_level.return_value = 550
         value = self.sh.measure_lux()
         self.assertEqual(550, value)
+
+    def test_window_open(self):
+        self.sh.manage_window()
+        self.assertTrue(self.sh.window_open)
