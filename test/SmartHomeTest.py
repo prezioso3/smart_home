@@ -78,3 +78,7 @@ class SmartHomeTest(unittest.TestCase):
         mock_temp_values.side_effect = [16, 19]
         self.sh.manage_window()
         self.assertFalse(self.sh.window_open)
+
+    def test_air_quality_below_threshold(self):
+        self.sh.monitor_air_quality()
+        self.assertTrue(self.sh.buzzer_on)
