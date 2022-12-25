@@ -55,6 +55,8 @@ class SmartHomeTest(unittest.TestCase):
         value = self.sh.measure_lux()
         self.assertEqual(550, value)
 
-    def test_window_open(self):
+    @patch('mock.adafruit_dht.DHT11.temperature', new_callable=PropertyMock)
+    def test_window_open_temp_indoor_lower(self, mock_temp_values):
+        mock_temp_values.side_effect = [24, 26]
         self.sh.manage_window()
         self.assertTrue(self.sh.window_open)

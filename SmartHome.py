@@ -110,10 +110,19 @@ class SmartHome:
         Please note that the above behavior is only triggered when both of the sensors measure
         temperature in the range of 18 to 30 degrees celsius. Otherwise, the window stays closed.
         """
+        temp1 = self.dht_indoor.temperature
+        temp2 = self.dht_outdoor.temperature
+
+        temp_diff = temp1 - temp2
+
         try:
-            # Your code goes here
-            # Remove the pass
-            self.window_open = True
+            if 18 <= temp1 <= 30 and 18 <= temp2 <= 30:
+                if temp1 < temp2 and temp_diff <= -2:
+                    self.servo.ChangeFrequency(50.0)
+                    self.servo.ChangeDutyCycle(12)
+                    self.window_open = True
+                    self.servo.ChangeFrequency(0.0)
+
         except RuntimeError as error:
             print(error.args[0])
             time.sleep(2)
