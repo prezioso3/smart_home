@@ -61,7 +61,7 @@ class SmartHome:
 
         if check_sensor_value == 0:
             return True
-        elif check_sensor_value > 0:
+        else:
             return False
 
     def manage_light_level(self) -> None:

@@ -19,7 +19,9 @@ class SmartHomeTest(unittest.TestCase):
         res = sh.check_room_occupancy()
         self.assertTrue(res)
 
-    def test_room_empty(self):
+    @patch.object(GPIO, "input")
+    def test_room_empty(self, mock_sensor_value):
+        mock_sensor_value.return_value = 10
         sh = SmartHome()
         res = sh.check_room_occupancy()
         self.assertFalse(res)
