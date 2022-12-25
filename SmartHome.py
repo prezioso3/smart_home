@@ -88,6 +88,9 @@ class SmartHome:
         elif light_level < self.LUX_THR and GPIO.input(self.INFRARED_PIN) == 0:
             GPIO.output(self.LIGHT_PIN, GPIO.HIGH)
             self.light_on = True
+        elif light_level < self.LUX_THR and GPIO.input(self.INFRARED_PIN) != 0:
+            GPIO.output(self.LIGHT_PIN, GPIO.LOW)
+            self.light_on = False
 
     def measure_lux(self) -> float:
         """
