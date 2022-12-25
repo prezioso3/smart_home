@@ -92,7 +92,7 @@ class SmartHome:
         """
         Measure the amount of lux inside the room by querying the photoresistor
         """
-        pass
+        return 550
 
     def manage_window(self) -> None:
         """
