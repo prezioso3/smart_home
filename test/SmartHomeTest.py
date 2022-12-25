@@ -39,6 +39,8 @@ class SmartHomeTest(unittest.TestCase):
         self.sh.manage_light_level()
         self.assertFalse(self.sh.light_on)
 
-    def test_light_level_above_threshold(self):
+    @patch.object(GPIO, "input")
+    def test_light_level_valid(self, mock_light_level):
+        mock_light_level.return_value = 550
         value = self.sh.measure_lux()
         self.assertEqual(550, value)

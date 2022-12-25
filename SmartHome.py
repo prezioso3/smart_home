@@ -92,7 +92,7 @@ class SmartHome:
         """
         Measure the amount of lux inside the room by querying the photoresistor
         """
-        return 550
+        return GPIO.input(self.PHOTO_PIN)
 
     def manage_window(self) -> None:
         """
