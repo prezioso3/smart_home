@@ -11,4 +11,8 @@ class SmartHomeTest(unittest.TestCase):
     """
     Your test cases go here
     """
-    pass
+
+    def test_room_occupancy(self):
+        sh = SmartHome()
+        res = sh.check_room_occupancy()
+        self.assertTrue(res)
