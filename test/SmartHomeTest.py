@@ -12,16 +12,17 @@ class SmartHomeTest(unittest.TestCase):
     Your test cases go here
     """
 
+    def setUp(self) -> None:
+        self.sh = SmartHome()
+
     @patch.object(GPIO, "input")
     def test_room_occupancy(self, mock_sensor_value):
         mock_sensor_value.return_value = 0
-        sh = SmartHome()
-        res = sh.check_room_occupancy()
+        res = self.sh.check_room_occupancy()
         self.assertTrue(res)
 
     @patch.object(GPIO, "input")
     def test_room_empty(self, mock_sensor_value):
         mock_sensor_value.return_value = 10
-        sh = SmartHome()
-        res = sh.check_room_occupancy()
+        res = self.sh.check_room_occupancy()
         self.assertFalse(res)
