@@ -118,25 +118,25 @@ class SmartHome:
         try:
             if 18 <= temp1 <= 30 and 18 <= temp2 <= 30:
                 if temp1 < temp2 and temp_diff <= -2:
+                    GPIO.output(self.SERVO_PIN, GPIO.HIGH)
                     self.servo.ChangeFrequency(50.0)
                     self.servo.ChangeDutyCycle(12)
                     self.window_open = True
-                    self.servo.ChangeFrequency(0.0)
                 elif temp1 > temp2 and temp_diff >= 2:
+                    GPIO.output(self.SERVO_PIN, GPIO.HIGH)
                     self.servo.ChangeFrequency(50.0)
                     self.servo.ChangeDutyCycle(12)
                     self.window_open = True
-                    self.servo.ChangeFrequency(0.0)
                 else:
+                    GPIO.output(self.SERVO_PIN, GPIO.LOW)
                     self.servo.ChangeFrequency(50.0)
                     self.servo.ChangeDutyCycle(2)
                     self.window_open = False
-                    self.servo.ChangeFrequency(0.0)
             else:
+                GPIO.output(self.SERVO_PIN, GPIO.LOW)
                 self.servo.ChangeFrequency(50.0)
                 self.servo.ChangeDutyCycle(2)
                 self.window_open = False
-                self.servo.ChangeFrequency(0.0)
         except RuntimeError as error:
             print(error.args[0])
             time.sleep(2)
@@ -157,4 +157,7 @@ class SmartHome:
         if the amount of detected gas is greater than or equal to 500 PPM,
         the system turns on the buzzer until the smoke level goes below the threshold of 500 PPM.
         """
-        self.buzzer_on = True
+        gas_level = GPIO.input(self.AIR_QUALITY_PIN)
+        if gas_level < 500:
+            GPIO.output(self.BUZZER_PIN, GPIO.IN)
+            self.buzzer_on = False
