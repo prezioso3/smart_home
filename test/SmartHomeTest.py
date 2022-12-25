@@ -18,3 +18,8 @@ class SmartHomeTest(unittest.TestCase):
         sh = SmartHome()
         res = sh.check_room_occupancy()
         self.assertTrue(res)
+
+    def test_room_empty(self):
+        sh = SmartHome()
+        res = sh.check_room_occupancy()
+        self.assertFalse(res)
