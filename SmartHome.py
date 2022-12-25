@@ -20,6 +20,8 @@ class SmartHome:
     LIGHT_PIN = 26
     PHOTO_PIN = 27  # Photoresistor pin
 
+    LUX_THR = 500
+
     def __init__(self):
         """
         Constructor
@@ -76,9 +78,8 @@ class SmartHome:
         (by querying the photoresistor).
         If the measured light level inside the room is above or equal to the threshold of 500 lux,
         the smart home system does not turn on the smart light bulb even if the user is in the room;
-         on the other hand, if the light level is below the threshold of 500 lux and the user is in the room,
-         the system turns on the smart light bulb as usual.
-
+        on the other hand, if the light level is below the threshold of 500 lux and the user is in the room,
+        the system turns on the smart light bulb as usual.
         """
         if GPIO.input(self.INFRARED_PIN) == 0:
             GPIO.output(self.LIGHT_PIN, GPIO.HIGH)

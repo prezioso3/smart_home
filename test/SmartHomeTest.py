@@ -38,3 +38,7 @@ class SmartHomeTest(unittest.TestCase):
         mock_sensor_value.return_value = 32
         self.sh.manage_light_level()
         self.assertFalse(self.sh.light_on)
+
+    def test_light_level_above_threshold(self):
+        value = self.sh.measure_lux()
+        self.assertEqual(550, value)
