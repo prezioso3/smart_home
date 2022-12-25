@@ -27,8 +27,10 @@ class SmartHomeTest(unittest.TestCase):
         res = self.sh.check_room_occupancy()
         self.assertFalse(res)
 
+    @patch.object(SmartHome, "measure_lux")
     @patch.object(GPIO, "input")
-    def test_turn_light_on(self, mock_sensor_value):
+    def test_turn_light_on(self, mock_sensor_value, mock_light_level):
+        mock_light_level.return_value = 490
         mock_sensor_value.return_value = 0
         self.sh.manage_light_level()
         self.assertTrue(self.sh.light_on)

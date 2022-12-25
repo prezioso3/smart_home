@@ -81,12 +81,13 @@ class SmartHome:
         on the other hand, if the light level is below the threshold of 500 lux and the user is in the room,
         the system turns on the smart light bulb as usual.
         """
-        if GPIO.input(self.INFRARED_PIN) == 0:
-            GPIO.output(self.LIGHT_PIN, GPIO.HIGH)
-            self.light_on = True
-        else:
+        light_level = self.measure_lux()
+        if light_level >= self.LUX_THR:
             GPIO.output(self.LIGHT_PIN, GPIO.LOW)
             self.light_on = False
+        elif light_level < self.LUX_THR and GPIO.input(self.INFRARED_PIN) == 0:
+            GPIO.output(self.LIGHT_PIN, GPIO.HIGH)
+            self.light_on = True
 
     def measure_lux(self) -> float:
         """
