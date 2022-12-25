@@ -26,3 +26,7 @@ class SmartHomeTest(unittest.TestCase):
         mock_sensor_value.return_value = 10
         res = self.sh.check_room_occupancy()
         self.assertFalse(res)
+
+    def test_turn_light_on(self):
+        self.sh.manage_light_level()
+        self.assertTrue(self.sh.light_on)
