@@ -113,7 +113,7 @@ class SmartHome:
         try:
             # Your code goes here
             # Remove the pass
-            pass
+            self.window_open = True
         except RuntimeError as error:
             print(error.args[0])
             time.sleep(2)
