@@ -159,5 +159,8 @@ class SmartHome:
         """
         gas_level = GPIO.input(self.AIR_QUALITY_PIN)
         if gas_level < 500:
-            GPIO.output(self.BUZZER_PIN, GPIO.IN)
+            GPIO.output(self.BUZZER_PIN, GPIO.LOW)
             self.buzzer_on = False
+        else:
+            GPIO.output(self.BUZZER_PIN, GPIO.HIGH)
+            self.buzzer_on = True
