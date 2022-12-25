@@ -80,7 +80,6 @@ class SmartHome:
          the system turns on the smart light bulb as usual.
 
         """
-        self.light_on = True
         if GPIO.input(self.INFRARED_PIN) == 0:
             GPIO.output(self.LIGHT_PIN, GPIO.HIGH)
             self.light_on = True
